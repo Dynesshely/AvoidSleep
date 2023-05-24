@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Controls;
 
 namespace AvoidSleep.WPF;
@@ -15,6 +16,13 @@ public partial class MainWindow : Window
 
         if (!Shell.IsLightTheme())
             ChangeTheme(true);
+
+        Closed += (_, _) =>
+        {
+            Application.Current.Shutdown();
+
+            Environment.Exit(0);
+        };
     }
 
     private bool state = false;
